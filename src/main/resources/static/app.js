@@ -47,9 +47,29 @@ function showGreeting(message) {
 
 $(function () {
     $("form").on('submit', function (e) {
-        e.preventDefault();
+        e.preventDefault(); // 기본 폼 제출 방지
     });
-    $( "#connect" ).click(function() { connect(); });
-    $( "#disconnect" ).click(function() { disconnect(); });
-    $( "#send" ).click(function() { sendName(); });
+
+    $("#connect").click(function() { connect(); });
+    $("#disconnect").click(function() { disconnect(); });
+    
+    $("#send").click(function() { sendMessage(); });
+
+    // 메시지 입력 필드에서 엔터 키 감지
+    $("#message").keypress(function(e) {
+        if (e.which === 13) { // 엔터 키 코드
+            e.preventDefault(); // 기본 동작 방지
+            sendMessage(); // 메시지 전송
+        }
+    });
 });
+
+function sendMessage() {
+    const message = $("#message").val();
+    const name = $("#name").val();
+    
+    // 메시지 전송 로직 (예: stompClient.send 등)
+    stompClient.send("/app/hello", {}, JSON.stringify({'name': name, 'message': message}));
+    
+    $("#message").val(''); // 입력 필드 초기화
+}
