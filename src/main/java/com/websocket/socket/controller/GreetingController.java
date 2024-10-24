@@ -21,7 +21,7 @@ public class GreetingController {
     @MessageMapping("/hello")
     @SendTo("/topic/greetings")
     public Greeting greeting(HelloMessage message) throws Exception {
-        Thread.sleep(1000); // simulated delay
+        Thread.sleep(200); // simulated delay
 
         // Kafka에 메시지를 전송
         String processedMessage = message.getName() + ":" + HtmlUtils.htmlEscape(message.getMessage());
