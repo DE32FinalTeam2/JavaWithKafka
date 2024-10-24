@@ -17,13 +17,13 @@ import java.util.Map;
 public class KafkaConsumerConfig {
 
     private static final String BOOTSTRAP_SERVERS = "localhost:9092";
-    private static final String GROUP_ID = "chat-group"; // 그룹 ID 설정
+    //private static final String GROUP_ID = "chat-group"; // 그룹 ID 설정
 
     @Bean
     public ConsumerFactory<String, String> consumerFactory() {
         Map<String, Object> configProps = new HashMap<>();
         configProps.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, BOOTSTRAP_SERVERS);
-        configProps.put(ConsumerConfig.GROUP_ID_CONFIG, GROUP_ID);
+        //configProps.put(ConsumerConfig.GROUP_ID_CONFIG, GROUP_ID);
         configProps.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
         configProps.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
         configProps.put(ConsumerConfig.ENABLE_AUTO_COMMIT_CONFIG, "true");
