@@ -6,7 +6,10 @@ import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.kafka.support.SendResult;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.util.HtmlUtils;
+
+import java.util.Map;
 import java.util.concurrent.CompletableFuture;
 
 import com.websocket.socket.greeting.Greeting;
@@ -33,7 +36,7 @@ public class GreetingController {
 
     @MessageMapping("/hello")
     @SendTo("/topic/greetings")
-    public Greeting greeting(HelloMessage message, String message2) throws Exception {
+    public Greeting greeting(HelloMessage message, @RequestHeader Map<String, String> header,  String message2) throws Exception {
         Thread.sleep(200); // simulated delay
 
         // 현재 시간 포맷 지정
@@ -42,8 +45,8 @@ public class GreetingController {
         String formattedTime = now.format(formatter);
 
         // 순번을 포함한 Kafka에 메시지를 전송할 메시지 포맷
-        String processedMessage = "[" + formattedTime + "] " + message.getName() + " : " + HtmlUtils.htmlEscape(message.getMessage());
-        String proMessage = formattedTime + " , " + message.getName() + " , " + HtmlUtils.htmlEscape(message.getMessage());
+        String processedMessage = message.getClientIp() + " , " + "[" + formattedTime + "] " + message.getName() + " : " + HtmlUtils.htmlEscape(message.getMessage());
+        String proMessage = header.get("clientIp")+" , " + formattedTime + " , " + message.getName() + " , " + HtmlUtils.htmlEscape(message.getMessage());
 
         // Kafka로 메세지 전송 및 비동시적으로 결과 다룸
         CompletableFuture<SendResult<String, String>> future = kafkaTemplate.send(TOPIC, proMessage);

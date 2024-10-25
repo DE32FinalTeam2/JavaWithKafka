@@ -35,11 +35,11 @@ function disconnect() {
 // function sendName() {
 //     stompClient.send("/app/hello", {}, JSON.stringify({'name': $("#name").val()}));
 // }
-function sendName() {
-    const name = $("#name").val();
-    const message = $("#message").val();
-    stompClient.send("/app/hello", {}, JSON.stringify({'name': name, 'message': message}));
-}
+// function sendName() {
+//     const name = $("#name").val();
+//     const message = $("#message").val();
+//     stompClient.send("/app/hello", {}, JSON.stringify({'name': name, 'message': message}));
+// }
 
 function showGreeting(message) {
     $("#greetings").append("<tr><td>" + message + "</td></tr>");
@@ -64,12 +64,38 @@ $(function () {
     });
 });
 
+//header 만들기
 function sendMessage() {
     const message = $("#message").val();
     const name = $("#name").val();
-    
-    // 메시지 전송 로직 (예: stompClient.send 등)
-    stompClient.send("/app/hello", {}, JSON.stringify({'name': name, 'message': message}));
-    
-    $("#message").val(''); // 입력 필드 초기화
+
+    fetch('https://ipinfo.io/?token=bead924cf3e330')
+        .then(response => response.json())
+        .then(data => {
+            const ipAddress = data.ip;
+            console.log('Your IP address is:', ipAddress);
+
+            // IP 주소를 받은 후에 메시지 전송 로직 실행
+            stompClient.send("/app/hello", {}, JSON.stringify({
+                'name': name,
+                'message': message,
+                'clientIp': ipAddress
+            }));
+
+            $("#message").val(''); // 입력 필드 초기화
+        })
+        .catch(error => {
+            console.error('Error fetching IP address:', error);
+        });
 }
+
+
+// function sendMessage() {
+//     const message = $("#message").val();
+//     const name = $("#name").val();
+    
+//     // 메시지 전송 로직 (예: stompClient.send 등)
+//     stompClient.send("/app/hello", {}, JSON.stringify({'name': name, 'message': message}));
+    
+//     $("#message").val(''); // 입력 필드 초기화
+// }
