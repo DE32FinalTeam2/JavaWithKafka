@@ -13,7 +13,7 @@ public class Team2Entity {
     private String username;
     private String chattingContent;
     private String ip;
-    private char chatCheck;
+    private boolean chatCheck;
     
 }
 // helloMessage.getChattime(), helloMessage.getUsername(), helloMessage.getChattingcontent(), helloMessage.getChatip(), helloMessage.getchatcheck()

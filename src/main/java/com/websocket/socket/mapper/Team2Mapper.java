@@ -9,9 +9,9 @@ import com.websocket.socket.message.HelloMessage;
 public interface Team2Mapper {
     List<HelloMessage> findAll();
 
-    void createData(int id, String chatTime, String username, String chattingContent, String ip, char chatCheck);
+    void createData(int id, String chatTime, String username, String chattingContent, String ip, boolean chatCheck);
     
-    void updateData(int id, String chatTime, String username, String chattingContent, String ip, char chatCheck);
+    void updateData(int id, String chatTime, String username, String chattingContent, String ip, boolean chatCheck);
 
     void deleteData(int id);
 }
