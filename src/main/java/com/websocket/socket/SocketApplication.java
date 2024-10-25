@@ -10,3 +10,4 @@ public class SocketApplication {
 		SpringApplication.run(SocketApplication.class, args);
 	}
 }
+	
