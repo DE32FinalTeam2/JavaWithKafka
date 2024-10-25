@@ -1,6 +1,7 @@
 package com.websocket.socket.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import com.websocket.socket.entity.Team2Entity;
@@ -8,7 +9,7 @@ import com.websocket.socket.service.Team2Service;
 
 import java.util.List;
 
-@RestController
+@Controller
 @RequestMapping("/messages") // 모든 메서드의 기본 URL 설정
 public class Team2Controller {
 
@@ -24,6 +25,7 @@ public class Team2Controller {
     // R - Read All
     @GetMapping
     public List<Team2Entity> list() {
+        System.out.println("controller");
         return team2Service.getMessages();
     }
 

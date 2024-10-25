@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.websocket.socket.entity.Team2Entity;
 import com.websocket.socket.mapper.Team2Mapper;
-import com.websocket.socket.message.HelloMessage;
+
 
 @Service
 public class Team2Service {
@@ -16,6 +16,7 @@ public class Team2Service {
   Team2Mapper team2Mapper;
 
   public List<Team2Entity> getMessages() {
+    System.out.println("service");
 	  List<Team2Entity> r = team2Mapper.findAll();
 	  return r;
 	}
