@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.HtmlUtils;
 
 import com.websocket.socket.entity.Team2Entity;
@@ -84,33 +85,6 @@ public class GreetingController {
             System.err.println("로그 디렉터리 생성 중에 문제가 발생했습니다.");
             e.printStackTrace();
         }
-    }
-
-    @Autowired
-    Team2Service team2Service;
-
-    @GetMapping("/hello2")
-    public List<Team2Entity> list() {
-		List<Team2Entity> r = team2Service.getMessages();
-		return r;	
-	}
-    
-    //C
-    @PostMapping("/hello2")
-    public void createData(@RequestBody Team2Entity team2Entity) {
-        team2Service.createData(team2Entity);
-    }
-
-    //U
-    @PutMapping("/hello2/{id}")
-    public void updateData(@PathVariable Integer id, @RequestBody Team2Entity team2Entity) {
-        team2Service.updateData(id, team2Entity);
-    }
-
-    //D
-    @DeleteMapping("/hello2/{id}")
-    public void deleteData(@PathVariable Integer id) {
-        team2Service.deleteData(id);
     }
 }
 
