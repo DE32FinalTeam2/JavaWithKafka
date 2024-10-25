@@ -10,9 +10,9 @@ import com.websocket.socket.entity.Team2Entity;
 public interface Team2Mapper {
     List<Team2Entity> findAll();
 
-    void createData(int id, String chatTime, String username, String chattingContent, String ip, boolean chatCheck);
+    void createData(int id, int offset, String chatTime, String username, String chattingContent, String ip, boolean chatCheck);
     
-    void updateData(int id, String chatTime, String username, String chattingContent, String ip, boolean chatCheck);
+    void updateData(int id, String username, boolean chatCheck);
 
     void deleteData(int id);
 }

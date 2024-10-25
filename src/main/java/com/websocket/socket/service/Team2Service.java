@@ -21,11 +21,11 @@ public class Team2Service {
 	  return r;
 	}
   public void createData(Team2Entity team2Entity) {
-    team2Mapper.createData(team2Entity.getId(), team2Entity.getChatTime(), team2Entity.getUsername(), team2Entity.getChattingContent(), team2Entity.getIp(), team2Entity.isChatCheck());
+    team2Mapper.createData(team2Entity.getId(), team2Entity.getOffset(), team2Entity.getChatTime(), team2Entity.getUsername(), team2Entity.getChattingContent(), team2Entity.getIp(), team2Entity.isChatCheck());
   }
 
   public void updateData(Integer id, Team2Entity team2Entity) {
-    team2Mapper.updateData(team2Entity.getId(), team2Entity.getChatTime(), team2Entity.getUsername(), team2Entity.getChattingContent(), team2Entity.getIp(), team2Entity.isChatCheck());
+    team2Mapper.updateData(team2Entity.getId(), team2Entity.getUsername(), team2Entity.isChatCheck());
   }
 
   public void deleteData(Integer id) {

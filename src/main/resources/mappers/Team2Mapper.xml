@@ -11,13 +11,13 @@
 	</select>
 
 	<insert id="createData">
-		INSERT INTO chatting_supervisor(chat_time, username, chatting_content, chat_ip, chat_check)
-		VALUES (#{chatTime}, #{username}, #{chattingContent}, #{ip}, #{chatCheck})
+		INSERT INTO chatting_supervisor(offset, chat_time, username, chatting_content, chat_ip, chat_check)
+		VALUES (#{offset}, #{chatTime}, #{username}, #{chattingContent}, #{ip}, #{chatCheck})
 	</insert>
 
 	<update id="updateData">
 		UPDATE chatting_supervisor
-		SET chat_time = #{chatTime}, username = #{username}, chatting_content = #{chattingContent}, chat_ip = #{ip}, chat_check = #{chatCheck}
+		SET username = #{username}, chat_check = #{chatCheck}
 		WHERE id=#{id}
 	</update>
 
