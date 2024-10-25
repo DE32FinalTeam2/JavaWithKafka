@@ -5,9 +5,15 @@ import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.util.HtmlUtils;
 
+import com.websocket.entity.Team2Entity;
 import com.websocket.service.Team2Service;
 import com.websocket.socket.greeting.Greeting;
 import com.websocket.socket.message.HelloMessage;
@@ -84,10 +90,26 @@ public class GreetingController {
 
     @GetMapping("/hello2")
     public List<HelloMessage> list() {
-		System.out.println("[Controller]");
 		List<HelloMessage> r = team2Service.getMessages();
 		return r;	
 	}
     
+    //C
+    @PostMapping("/hello2")
+    public void createData(@RequestBody Team2Entity team2Entity) {
+        team2Service.createData(team2Entity);
+    }
+
+    //U
+    @PutMapping("/hello2/{id}")
+    public void updateData(@PathVariable Integer id, @RequestBody Team2Entity team2Entity) {
+        team2Service.updateData(id, team2Entity);
+    }
+
+    //D
+    @DeleteMapping("/hello2/{id}")
+    public void deleteData(@PathVariable Integer id) {
+        team2Service.deleteData(id);
+    }
 }
 

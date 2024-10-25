@@ -10,4 +10,20 @@
 		ORDER BY id DESC
 	</select>
 
+	<insert id="insertTodo">
+		INSERT INTO chatting_supervisor(chat_time, username, chatting_content, chat_ip, chat_check)
+		VALUES (#{chatTime}, #{username}, #{chattingContent}, #{ip}, #{chatCheck})
+	</insert>
+
+	<update id="updateTodoById">
+		UPDATE chatting_supervisor
+		SET subject = #{chatTime}, #{username}, #{chattingContent}, #{ip}, #{chatCheck}
+		WHERE id=#{id}
+	</update>
+
+	<delete id="deleteTodoById">
+		DELETE FROM chatting_supervisor
+		WHERE id=#{id}
+	</delete>
+
 </mapper>
