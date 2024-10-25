@@ -18,6 +18,7 @@ services:
     ports:
       - 8888:8972
     restart: always
+    image: esthercho7/team2app:latest
     depends_on:
       - database
     links:
