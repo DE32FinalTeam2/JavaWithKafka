@@ -28,6 +28,8 @@ public class GreetingController {
     @Autowired
     private KafkaTemplate<String, String> kafkaTemplate; // KafkaTemplate 주입
 
+    private int messageCounter = 1; // 메시지 카운터
+
     @MessageMapping("/hello")
     @SendTo("/topic/greetings")
     public Greeting greeting(HelloMessage message, String message2) throws Exception {
@@ -38,15 +40,15 @@ public class GreetingController {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         String formattedTime = now.format(formatter);
 
-        // Kafka에 메시지를 전송할 메시지 포맷
-        String processedMessage = "[" + formattedTime + "] " + message.getName() + " : " + HtmlUtils.htmlEscape(message.getMessage());
-        String proMessage = formattedTime + " , " + message.getName() + " , " + HtmlUtils.htmlEscape(message.getMessage());
+        // 순번을 포함한 Kafka에 메시지를 전송할 메시지 포맷
+        String proMessage = messageCounter++ + ", " + formattedTime + " , " + message.getName() + " , " + HtmlUtils.htmlEscape(message.getMessage()) + " , " + "123.123.123" + " , " + "1"; // IP와 체크는 예시로 고정된 값입니다.
 
         kafkaTemplate.send(TOPIC, proMessage); // Kafka로 메시지 전송
 
         // 로그 파일에 메시지 기록
         writeToLogFile(proMessage);
 
+        String processedMessage = "[" + formattedTime + "] " + message.getName() + " : " + HtmlUtils.htmlEscape(message.getMessage());
         return new Greeting(processedMessage); // 메시지 반환
     }
 
@@ -76,4 +78,3 @@ public class GreetingController {
         }
     }
 }
-
