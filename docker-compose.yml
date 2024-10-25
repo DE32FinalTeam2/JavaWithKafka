@@ -24,4 +24,4 @@ services:
       - database
     platform: linux/amd64
     environment:
-      SPRING_DATASOURCE_URL: jdbc:mariadb://database:3306/team2db
+      SPRING_DATASOURCE_URL: jdbc:mariadb://localhost:6033/team2db

@@ -90,8 +90,8 @@ public class GreetingController {
     Team2Service team2Service;
 
     @GetMapping("/hello2")
-    public List<HelloMessage> list() {
-		List<HelloMessage> r = team2Service.getMessages();
+    public List<Team2Entity> list() {
+		List<Team2Entity> r = team2Service.getMessages();
 		return r;	
 	}
     

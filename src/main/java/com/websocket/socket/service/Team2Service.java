@@ -15,8 +15,8 @@ public class Team2Service {
   @Autowired
   Team2Mapper team2Mapper;
 
-  public List<HelloMessage> getMessages() {
-	  List<HelloMessage> r = team2Mapper.findAll();
+  public List<Team2Entity> getMessages() {
+	  List<Team2Entity> r = team2Mapper.findAll();
 	  return r;
 	}
   public void createData(Team2Entity team2Entity) {
