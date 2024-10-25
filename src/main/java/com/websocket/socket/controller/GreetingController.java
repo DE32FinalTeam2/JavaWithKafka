@@ -4,8 +4,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.SendTo;
+import org.springframework.kafka.support.SendResult;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.util.HtmlUtils;
+import java.util.concurrent.CompletableFuture;
 
 import com.websocket.socket.greeting.Greeting;
 import com.websocket.socket.message.HelloMessage;
@@ -29,8 +31,6 @@ public class GreetingController {
     @Autowired
     private KafkaTemplate<String, String> kafkaTemplate; // KafkaTemplate 주입
 
-    private int messageCounter = 1; // 메시지 카운터
-
     @MessageMapping("/hello")
     @SendTo("/topic/greetings")
     public Greeting greeting(HelloMessage message, String message2) throws Exception {
@@ -42,14 +42,21 @@ public class GreetingController {
         String formattedTime = now.format(formatter);
 
         // 순번을 포함한 Kafka에 메시지를 전송할 메시지 포맷
-        String proMessage = messageCounter++ + "," + formattedTime + "," + message.getName() + "," + HtmlUtils.htmlEscape(message.getMessage()) + "," + "123.123.123" + "," + "1"; // IP와 체크는 예시로 고정된 값입니다.
-
-        kafkaTemplate.send(TOPIC, proMessage); // Kafka로 메시지 전송
-
-        // 로그 파일에 메시지 기록
-        writeToLogFile(proMessage);
-
         String processedMessage = "[" + formattedTime + "] " + message.getName() + " : " + HtmlUtils.htmlEscape(message.getMessage());
+        String proMessage = formattedTime + " , " + message.getName() + " , " + HtmlUtils.htmlEscape(message.getMessage());
+
+        // Kafka로 메세지 전송 및 비동시적으로 결과 다룸
+        CompletableFuture<SendResult<String, String>> future = kafkaTemplate.send(TOPIC, proMessage);
+
+        future.thenAccept(result -> {
+            long offset = result.getRecordMetadata().offset(); // Get the offset
+            // Log the message along with the offset
+            writeToLogFile(offset + " , " + proMessage);
+        }).exceptionally(ex -> {
+            System.err.println("Failed to send message to Kafka: " + ex.getMessage());
+            return null;
+        });
+
         return new Greeting(processedMessage); // 메시지 반환
     }
 
