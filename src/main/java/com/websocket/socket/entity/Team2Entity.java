@@ -1,4 +1,4 @@
-package com.websocket.entity;
+package com.websocket.socket.entity;
 
 import lombok.Getter;
 import lombok.Setter;

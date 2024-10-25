@@ -13,10 +13,11 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.util.HtmlUtils;
 
-import com.websocket.entity.Team2Entity;
-import com.websocket.service.Team2Service;
+import com.websocket.socket.entity.Team2Entity;
 import com.websocket.socket.greeting.Greeting;
 import com.websocket.socket.message.HelloMessage;
+import com.websocket.socket.service.Team2Service;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;

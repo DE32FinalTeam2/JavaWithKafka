@@ -1,4 +1,4 @@
-package com.websocket.mapper;
+package com.websocket.socket.mapper;
 
 import java.util.List;
 

@@ -1,12 +1,12 @@
-package com.websocket.service;
+package com.websocket.socket.service;
 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.websocket.entity.Team2Entity;
-import com.websocket.mapper.Team2Mapper;
+import com.websocket.socket.entity.Team2Entity;
+import com.websocket.socket.mapper.Team2Mapper;
 import com.websocket.socket.message.HelloMessage;
 
 @Service
