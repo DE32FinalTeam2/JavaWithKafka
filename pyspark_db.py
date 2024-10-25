@@ -49,7 +49,7 @@ def insert(log_df):
             )).collect()  # collect()를 사용하여 리스트로 변환
 
             # 중복을 피하기 위해 데이터베이스에서 현재 오프셋 목록을 가져옴
-            cursor.execute("SELECT `offset` FROM test_db")
+            cursor.execute("SELECT `offset` FROM chatting_supervisor")
             existing_offsets = {row['offset'] for row in cursor.fetchall()}
 
             # 중복되지 않은 파라미터 필터링
@@ -58,7 +58,7 @@ def insert(log_df):
             # INSERT 쿼리 작성
             if unique_params:  # 중복되지 않은 데이터가 있는 경우에만 삽입
                 cursor.executemany("""
-                    INSERT INTO test_db (`offset`, chat_time, username, chatting_content, chat_ip, chat_check)
+                    INSERT INTO chatting_supervisor (`offset`, chat_time, username, chatting_content, chat_ip, chat_check)
                     VALUES (%s, %s, %s, %s, %s, %s)
                 """, unique_params)
 
