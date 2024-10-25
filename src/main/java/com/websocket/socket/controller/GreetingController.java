@@ -5,12 +5,15 @@ import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.util.HtmlUtils;
 
+import com.websocket.service.Team2Service;
 import com.websocket.socket.greeting.Greeting;
 import com.websocket.socket.message.HelloMessage;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -75,5 +78,16 @@ public class GreetingController {
             e.printStackTrace();
         }
     }
+
+    @Autowired
+    Team2Service team2Service;
+
+    @GetMapping("/hello2")
+    public List<HelloMessage> list() {
+		System.out.println("[Controller]");
+		List<HelloMessage> r = team2Service.getMessages();
+		return r;	
+	}
+    
 }
 
