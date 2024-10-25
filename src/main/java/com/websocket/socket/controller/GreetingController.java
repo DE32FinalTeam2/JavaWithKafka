@@ -41,7 +41,7 @@ public class GreetingController {
         String formattedTime = now.format(formatter);
 
         // 순번을 포함한 Kafka에 메시지를 전송할 메시지 포맷
-        String proMessage = messageCounter++ + ", " + formattedTime + " , " + message.getName() + " , " + HtmlUtils.htmlEscape(message.getMessage()) + " , " + "123.123.123" + " , " + "1"; // IP와 체크는 예시로 고정된 값입니다.
+        String proMessage = messageCounter++ + "," + formattedTime + "," + message.getName() + "," + HtmlUtils.htmlEscape(message.getMessage()) + "," + "123.123.123" + "," + "1"; // IP와 체크는 예시로 고정된 값입니다.
 
         kafkaTemplate.send(TOPIC, proMessage); // Kafka로 메시지 전송
 
