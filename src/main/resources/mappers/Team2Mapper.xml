@@ -1,27 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.websoket.mapper.Team2Mapper">
+<mapper namespace="com.websocket.mapper.Team2Mapper">
 
-    <select id="findAll" resultType="com.websoket.message.HelloMessage">
+    <select id="findAll" resultType="com.websocket.entity.Team2Entity">
 		SELECT
 			*
 		FROM chatting_supervisor
 		ORDER BY id DESC
 	</select>
 
-	<insert id="insertTodo">
+	<insert id="createData">
 		INSERT INTO chatting_supervisor(chat_time, username, chatting_content, chat_ip, chat_check)
 		VALUES (#{chatTime}, #{username}, #{chattingContent}, #{ip}, #{chatCheck})
 	</insert>
 
-	<update id="updateTodoById">
+	<update id="updateData">
 		UPDATE chatting_supervisor
-		SET subject = #{chatTime}, #{username}, #{chattingContent}, #{ip}, #{chatCheck}
+		SET chat_time = #{chatTime}, username = #{username}, chatting_content = #{chattingContent}, chat_ip = #{ip}, chat_check = #{chatCheck}
 		WHERE id=#{id}
 	</update>
 
-	<delete id="deleteTodoById">
+	<delete id="deleteData">
 		DELETE FROM chatting_supervisor
 		WHERE id=#{id}
 	</delete>
