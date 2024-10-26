@@ -5,12 +5,23 @@ import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.HtmlUtils;
 
+import com.websocket.socket.entity.Team2Entity;
 import com.websocket.socket.greeting.Greeting;
 import com.websocket.socket.message.HelloMessage;
+import com.websocket.socket.service.Team2Service;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -18,7 +29,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-@Controller
+@RestController
 public class GreetingController {
 
     private static final String TOPIC = "abcdefg"; // Kafka 토픽 이름
@@ -74,6 +85,33 @@ public class GreetingController {
             System.err.println("로그 디렉터리 생성 중에 문제가 발생했습니다.");
             e.printStackTrace();
         }
+    }
+
+    @Autowired
+    Team2Service team2Service;
+
+    @GetMapping("/hello2")
+    public List<Team2Entity> list() {
+		List<Team2Entity> r = team2Service.getMessages();
+		return r;	
+	}
+    
+    //C
+    @PostMapping("/hello2")
+    public void createData(@RequestBody Team2Entity team2Entity) {
+        team2Service.createData(team2Entity);
+    }
+
+    //U
+    @PutMapping("/hello2/{id}")
+    public void updateData(@PathVariable Integer id, @RequestBody Team2Entity team2Entity) {
+        team2Service.updateData(id, team2Entity);
+    }
+
+    //D
+    @DeleteMapping("/hello2/{id}")
+    public void deleteData(@PathVariable Integer id) {
+        team2Service.deleteData(id);
     }
 }
 
