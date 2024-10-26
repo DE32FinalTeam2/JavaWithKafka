@@ -12,4 +12,5 @@ import lombok.Setter;
 public class HelloMessage {
     private String name;
     private String message;
+    private String clientIp;
 }

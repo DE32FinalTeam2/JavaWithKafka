@@ -25,11 +25,11 @@ public class TodoService {
     return todoMapper.findById(id);
   }
 
-public void insertEntity(String subject, String body, Boolean completed) {
-	todoMapper.insertEntity(subject, body, completed);
-	// }
-	//throw new UnsupportedOperationException("Unimplemented method 'insertEntity'");
-}
+// public void insertEntity(String subject, String body, Boolean completed) {
+// 	todoMapper.insertEntity(subject, body, completed);
+// 	// }
+// 	//throw new UnsupportedOperationException("Unimplemented method 'insertEntity'");
+// }
 
 public void updateById(int id, TodoEntity todoEntity) {
 	todoEntity.setId(id);
@@ -38,6 +38,10 @@ public void updateById(int id, TodoEntity todoEntity) {
 
 public void deleteById(Integer id) {
 	todoMapper.deleteEntity(id);
+}
+
+public void insertEntity(String chat_time, String username, String chatting_content, String chat_ip,String chat_check) {
+	todoMapper.insertEntity(chat_time, username, chatting_content,chat_ip,chat_check );
 }
 
 

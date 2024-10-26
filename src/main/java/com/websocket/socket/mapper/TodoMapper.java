@@ -14,11 +14,13 @@ public interface TodoMapper {
 
     TodoEntity findById(Integer id);
 
-    void insertEntity(String subject, String body, Boolean completed);
+    // void insertEntity(String subject, String body, Boolean completed);
 
     void deleteEntity(Integer id);
 
     void updateEntity(TodoEntity todoEntity);
+
+    void insertEntity(String chat_time, String username, String chatting_content, String chat_ip, String chat_check);
 
     // void insertEntity(TodoEntity todoEntity);
 }

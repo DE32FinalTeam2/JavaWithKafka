@@ -1,10 +1,9 @@
-INSERT INTO ENCORE_TODO_TBL(SUBJECT, body, completed)
-VALUES('test1','test1',0);
+INSERT INTO chatlog(chat_time, username, chatting_content, chat_ip)
+VALUES('2024-10-27 01:14:55','이상우 ','ㅇㅇ',"218.237.137.28");
 
-INSERT INTO ENCORE_TODO_TBL(SUBJECT, body, completed)
-VALUES('test2','test2',0);
+INSERT INTO chatlog(chat_time, username, chatting_content, chat_ip)
+VALUES('2024-10-27 01:14:55','이상우 ','ㅇㅇ',"218.237.137.28");
 
-INSERT INTO ENCORE_TODO_TBL(SUBJECT, body, completed)
-VALUES('test3','test3',0);
-
+INSERT INTO chatlog(chat_time, username, chatting_content, chat_ip)
+VALUES('2024-10-27 01:14:55','이상우 ','ㅇㅇ',"218.237.137.28");
 

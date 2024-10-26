@@ -1,39 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="shop.samdul.greeting.mapper.TodoMapper">
+<mapper namespace="com.websocket.socket.mapper.TodoMapper">
 	<select id="findAll" resultType="com.websocket.socket.entity.TodoEntity">
 		SELECT
-			id, subject, body, completed
-		FROM ENCORE_TODO_TBL
-		ORDER BY id DESC
+			id,chat_time, username, chatting_content, chat_ip, chat_check
+		FROM chatlog
+		ORDER BY id ASC
 	</select>
 
 	<select id="findById" parameterType="int" resultType="com.websocket.socket.entity.TodoEntity">
         SELECT
-					id, subject, body, completed
-				FROM ENCORE_TODO_TBL 
+					id,chat_time, username, chatting_content, chat_ip, chat_check
+				FROM chatlog 
 				WHERE id = #{id}
     </select>
 
 	<insert id="insertEntity">
-  		insert into ENCORE_TODO_TBL(subject,body,completed)
-  		values(#{subject}, #{body}, #{completed})
+  		insert into chatlog(chat_time, username, chatting_content, chat_ip, chat_check)
+  		values(#{chat_time},#{username},#{chatting_content},#{chat_ip},#{chat_check})
 	</insert>
 
 	<update id="updateEntity">
-  		<!-- update ENCORE_TODO_TBL set
-    	subject = #{subject},
-    	body = #{body},
-    	completed = #{completed},
-  		where id = #{id} -->
-		UPDATE ENCORE_TODO_TBL
-		SET subject = #{subject}, body = #{body}, completed = #{completed}
-		WHERE id=#{id}
+    UPDATE chatlog
+    SET chat_time = #{chat_time},
+        username = #{username},
+        chatting_content = #{chatting_content},
+        chat_ip = #{chat_ip},
+        chat_check = #{chat_check}
+    WHERE id = #{id}
 	</update>
 
 	<delete id="deleteEntity">
-  		delete from ENCORE_TODO_TBL where id = #{id}
+  		delete from chatlog where id = #{id}
 	</delete>
 
 </mapper>

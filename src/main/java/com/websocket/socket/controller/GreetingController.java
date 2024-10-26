@@ -30,7 +30,7 @@ public class GreetingController {
 
     @MessageMapping("/hello")
     @SendTo("/topic/greetings")
-    public Greeting greeting(HelloMessage message, String message2) throws Exception {
+    public Greeting greeting(HelloMessage message,  String message2) throws Exception {
         Thread.sleep(200); // simulated delay
 
         // 현재 시간 포맷 지정
@@ -38,10 +38,9 @@ public class GreetingController {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         String formattedTime = now.format(formatter);
 
-        // Kafka에 메시지를 전송할 메시지 포맷
+        // 순번을 포함한 Kafka에 메시지를 전송할 메시지 포맷
         String processedMessage = "[" + formattedTime + "] " + message.getName() + " : " + HtmlUtils.htmlEscape(message.getMessage());
-        String proMessage = formattedTime + " , " + message.getName() + " , " + HtmlUtils.htmlEscape(message.getMessage());
-
+        String proMessage =  formattedTime + " , " + message.getName() + " , " + HtmlUtils.htmlEscape(message.getMessage()) +  " , " + message.getClientIp() ;
         kafkaTemplate.send(TOPIC, proMessage); // Kafka로 메시지 전송
 
         // 로그 파일에 메시지 기록

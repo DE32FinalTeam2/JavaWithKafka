@@ -10,8 +10,9 @@ import lombok.Getter;
 @ToString
 public class TodoEntity {
     private Integer id;
-    private String subject;
-    private String body;
-    private Boolean completed;
-    
+    private String chat_time; // datetime을 LocalDateTime으로 수정
+    private String username;
+    private String chatting_content; // 오타 수정: chatting_cotent -> chatting_content
+    private String chat_ip;
+    private String chat_check;
 }

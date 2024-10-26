@@ -20,34 +20,34 @@ public class TodoController{
 	@Autowired
 	TodoService todoService;	
 
-	@GetMapping("/todos")
+	@GetMapping("/logs")
 	public List<TodoEntity> list() {
 		System.out.println("[Controller]");
 		List<TodoEntity> r = todoService.getTodos();
 		return r;	
 	}
 	
-	@GetMapping("/todos/{id}")
+	@GetMapping("/logs/{id}")
 	public TodoEntity find(@PathVariable Integer id) {
 		TodoEntity r = todoService.findById(id);
 		return r;	
 	}
 
 	//C - INSERT
-	@PostMapping("/todos")
+	@PostMapping("/logs")
 	public void insert(@RequestBody TodoEntity todoEntity){
-		todoService.insertEntity(todoEntity.getSubject(), todoEntity.getBody(), todoEntity.getCompleted());
+		todoService.insertEntity(todoEntity.getChat_time(), todoEntity.getUsername(), todoEntity.getChatting_content(),todoEntity.getChat_ip(),todoEntity.getChat_check());
 	}
 
 	//U - UPDATE
-	@PutMapping("/todos/{id}")
+	@PutMapping("/logs/{id}")
 	public void update(@PathVariable Integer id, @RequestBody TodoEntity todoEntity){
 		todoService.updateById(id,todoEntity);
 		
 	}
 
 	//D - DELETE
-	@DeleteMapping("/todos/{id}")
+	@DeleteMapping("/logs/{id}")
 	public void delete(@PathVariable Integer id){
 		todoService.deleteById(id);		
 	}
