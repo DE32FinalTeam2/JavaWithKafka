@@ -9,6 +9,7 @@ services:
       MARIADB_DATABASE: team2db
     volumes:
       - ./src/main/resources/db_config/initdb.d:/docker-entrypoint-initdb.d
+      - ./log:/home/ubuntu/log          # 로컬의 ./log 디렉토리를 마운트
     ports:
       - 6033:3306
 
@@ -25,3 +26,5 @@ services:
     platform: linux/amd64
     environment:
       SPRING_DATASOURCE_URL: jdbc:mariadb://database:3306/team2db
+    volumes:
+      - ./log:/home/ubuntu/log          # 로컬의 ./log 디렉토리를 마운트
