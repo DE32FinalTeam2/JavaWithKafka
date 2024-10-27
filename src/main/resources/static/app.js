@@ -39,9 +39,18 @@ function disconnect() {
 //     stompClient.send("/app/hello", {}, JSON.stringify({'name': name, 'message': message}));
 // }
 
+// function showGreeting(message) {
+//     $("#greetings").append("<tr><td>" + message + "</td></tr>");
+// }
+
 function showGreeting(message) {
     $("#greetings").append("<tr><td>" + message + "</td></tr>");
+    
+    // 자동으로 스크롤을 아래로 내리기
+    const conversation = $("#conversation");
+    conversation.scrollTop(conversation.prop("scrollHeight")); // 스크롤을 최하단으로 이동
 }
+
 
 $(function () {
     $("form").on('submit', function (e) {
