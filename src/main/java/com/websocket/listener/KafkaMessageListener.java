@@ -14,7 +14,6 @@ public class KafkaMessageListener {
     @KafkaListener(topics = TOPIC)
     @SendTo("/hello")
     public String listen(String message) {
-        System.out.println("Received message: " + message);
         String message2= message;
         return message2;
     }

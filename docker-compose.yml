@@ -26,6 +26,6 @@ services:
     environment:
       SPRING_DATASOURCE_URL: jdbc:mariadb://database:3306/encore 
     volumes:
-      - /home/ubuntu/log2:/home/ubuntu/log     
+      - /home/ubuntu/log:/home/ubuntu/log     
 
 

@@ -80,10 +80,11 @@ function sendMessage() {
 
             // IP 주소를 받은 후에 메시지 전송 로직 실행
             stompClient.send("/app/hello", {}, JSON.stringify({
+                'time': formattedTime, // 현재 시간을 포함
                 'name': name,
                 'message': message,
-                'clientIp': ipAddress,
-                'time': formattedTime // 현재 시간을 포함
+                'clientIp': ipAddress
+               
             }));
 
             $("#message").val(''); // 입력 필드 초기화
