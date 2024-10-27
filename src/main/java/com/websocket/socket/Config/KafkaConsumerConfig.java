@@ -16,7 +16,7 @@ import java.util.Map;
 @EnableKafka
 public class KafkaConsumerConfig {
 
-    private static final String BOOTSTRAP_SERVERS = "172.17.0.1:9092";
+    private static final String BOOTSTRAP_SERVERS = "43.201.63.84:9092";
     //private static final String GROUP_ID = "chat-group"; // 그룹 ID 설정
 
     @Bean
