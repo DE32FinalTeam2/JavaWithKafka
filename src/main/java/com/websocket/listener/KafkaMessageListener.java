@@ -5,7 +5,6 @@ import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.stereotype.Component;
 
 
-
 @Component
 public class KafkaMessageListener {
 
@@ -15,6 +14,7 @@ public class KafkaMessageListener {
     @KafkaListener(topics = TOPIC)
     @SendTo("/hello")
     public String listen(String message) {
+        System.out.println("Received message: " + message);
         String message2= message;
         return message2;
     }

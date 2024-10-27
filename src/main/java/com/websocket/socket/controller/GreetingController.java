@@ -28,29 +28,8 @@ public class GreetingController {
     @Autowired
     private KafkaTemplate<String, String> kafkaTemplate; // KafkaTemplate 주입
 
-    @MessageMapping("/hello")
-    @SendTo("/topic/greetings")
-    public Greeting greeting(HelloMessage message,  String message2) throws Exception {
-        Thread.sleep(200); // simulated delay
-
-        // 현재 시간 포맷 지정
-        LocalDateTime now = LocalDateTime.now();
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-        String formattedTime = now.format(formatter);
-
-        // 순번을 포함한 Kafka에 메시지를 전송할 메시지 포맷
-        String processedMessage = "[" + formattedTime + "] " + message.getName() + " : " + HtmlUtils.htmlEscape(message.getMessage());
-        String proMessage =  formattedTime + " , " + message.getName() + " , " + HtmlUtils.htmlEscape(message.getMessage()) +  " , " + message.getClientIp() ;
-        kafkaTemplate.send(TOPIC, proMessage); // Kafka로 메시지 전송
-
-        // 로그 파일에 메시지 기록
-        writeToLogFile(proMessage);
-
-        return new Greeting(processedMessage); // 메시지 반환
-    }
-
-    // 로그 파일에 기록하는 메서드
-    private void writeToLogFile(String message) {
+      // 로그 파일에 기록하는 메서드
+      private void writeToLogFile(String message) {
         try {
             // 디렉터리 생성 (존재하지 않는 경우에만)
             Path logDir = Paths.get(LOG_DIR_PATH);
@@ -74,5 +53,31 @@ public class GreetingController {
             e.printStackTrace();
         }
     }
+
+    @MessageMapping("/hello")
+    @SendTo("/topic/greetings")
+    public Greeting greeting(HelloMessage message,  String message2) throws Exception {
+        Thread.sleep(200); // simulated delay
+
+        // 현재 시간 포맷 지정
+        // LocalDateTime now = LocalDateTime.now();
+        // DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        // String formattedTime = now.format(formatter);
+
+        // 순번을 포함한 Kafka에 메시지를 전송할 메시지 포맷
+        // String processedMessage = "[" + formattedTime + "] " + message.getName() + " : " + HtmlUtils.htmlEscape(message.getMessage());
+        String processedMessage = "[" + message.getTime() + "] " + message.getName() + " : " + HtmlUtils.htmlEscape(message.getMessage());
+        // String proMessage =  formattedTime + " , " + message.getName() + " , " + message.getMessage() +  " , " + message.getClientIp() ;
+        String proMessage =  message.getTime()+ " , " + message.getName() + " , " + message.getMessage() +  " , " + message.getClientIp() ;
+        // String proMessage =  HtmlUtils.htmlEscape(message.getMessage());
+        kafkaTemplate.send(TOPIC, proMessage); // Kafka로 메시지 전송
+
+        System.out.println(message2);
+        // writeToLogFile(proMessage);
+        writeToLogFile(message2);
+
+        return new Greeting(processedMessage); // 메시지 반환
+    }
+  
 }
 
