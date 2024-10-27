@@ -17,6 +17,7 @@ services:
   app:
     container_name: team2-app
     build: .
+    image: esthercho7/app:latest
     ports:
       - 8888:8972
     restart: always
