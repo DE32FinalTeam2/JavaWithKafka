@@ -9,7 +9,7 @@ import com.websocket.socket.service.Team2Service;
 
 import java.util.List;
 
-@Controller
+@RestController
 @RequestMapping("/messages") // 모든 메서드의 기본 URL 설정
 public class Team2Controller {
 
