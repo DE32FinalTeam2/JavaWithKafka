@@ -11,8 +11,8 @@
 	</select>
 
 	<insert id="createData">
-		INSERT INTO chatting_supervisor(`offset`, chat_time, username, chatting_content, chat_ip, chat_check)
-		VALUES (#{offset}, #{chatTime}, #{username}, #{chattingContent}, #{ip}, #{chatCheck})
+		INSERT INTO chatting_supervisor(chat_time, username, chatting_content, chat_ip, chat_check)
+		VALUES (#{chatTime}, #{username}, #{chattingContent}, #{ip}, #{chatCheck})
 	</insert>
 
 	<update id="updateData">

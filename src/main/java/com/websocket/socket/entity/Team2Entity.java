@@ -9,7 +9,7 @@ import lombok.ToString;
 @ToString
 public class Team2Entity {
     private int id;
-    private int offset;
+    //private int offset;
     private String chatTime;
     private String username;
     private String chattingContent;
