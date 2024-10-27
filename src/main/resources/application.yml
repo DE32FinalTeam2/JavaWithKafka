@@ -11,8 +11,3 @@ spring:
     name: socket
 mybatis:
   mapper-locations: mappers/*.xml
-logging:
-  file:
-    path: /home/ubuntu/log  # 로그 파일 경로 설정
-  level:
-    root: INFO  # 로그 레벨 설정
