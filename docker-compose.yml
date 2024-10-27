@@ -28,4 +28,4 @@ services:
     environment:
       SPRING_DATASOURCE_URL: jdbc:mariadb://database:3306/team2db
     volumes:
-      - ./log:/home/ubuntu/log
+      - /home/ubuntu/log:/home/ubuntu/log
