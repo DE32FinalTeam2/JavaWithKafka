@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.websocket.socket.mapper.TodoMapper">
+	<select id="findAll" resultType="com.websocket.socket.entity.TodoEntity">
+		SELECT
+			id,chat_time, username, chatting_content, chat_ip, chat_check
+		FROM chatlog
+		ORDER BY id ASC
+	</select>
+
+	<select id="findById" parameterType="int" resultType="com.websocket.socket.entity.TodoEntity">
+        SELECT
+					id,chat_time, username, chatting_content, chat_ip, chat_check
+				FROM chatlog 
+				WHERE id = #{id}
+    </select>
+
+	<insert id="insertEntity">
+  		insert into chatlog(chat_time, username, chatting_content, chat_ip, chat_check)
+  		values(#{chat_time},#{username},#{chatting_content},#{chat_ip},#{chat_check})
+	</insert>
+
+	<update id="updateEntity">
+    UPDATE chatlog
+    SET chat_time = #{chat_time},
+        username = #{username},
+        chatting_content = #{chatting_content},
+        chat_ip = #{chat_ip},
+        chat_check = #{chat_check}
+    WHERE id = #{id}
+	</update>
+
+	<delete id="deleteEntity">
+  		delete from chatlog where id = #{id}
+	</delete>
+
+</mapper>

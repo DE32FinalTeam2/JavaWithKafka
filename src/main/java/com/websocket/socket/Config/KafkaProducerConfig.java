@@ -13,11 +13,12 @@ import org.springframework.kafka.core.DefaultKafkaProducerFactory;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.kafka.core.ProducerFactory;
 
+
 @Configuration
 @EnableKafka
 public class KafkaProducerConfig {
 
-    private static final String BOOTSTRAP_SERVERS = "localhost:9092";
+    private static final String BOOTSTRAP_SERVERS = "172.17.0.1:9092";
 
     @Bean
     public ProducerFactory<String, String> producerFactory() {
