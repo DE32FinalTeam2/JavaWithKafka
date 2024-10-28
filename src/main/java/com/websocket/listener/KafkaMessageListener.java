@@ -5,7 +5,6 @@ import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.stereotype.Component;
 
 
-
 @Component
 public class KafkaMessageListener {
 
@@ -19,3 +18,5 @@ public class KafkaMessageListener {
         return message2;
     }
 }
+
+

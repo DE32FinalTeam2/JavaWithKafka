@@ -10,6 +10,8 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class HelloMessage {
+    private String time;
     private String name;
     private String message;
+    private String clientIp;
 }
